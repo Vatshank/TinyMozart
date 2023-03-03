@@ -14,7 +14,7 @@ import torchaudio
 # from google.colab import drive
 # drive.mount('/content/gdrive')
 
-base_path = '/content/gdrive/My Drive/colab_notebooks/tiny_mozart/audiolm_librispeech_training'
+base_path = '/content/drive/MyDrive/colab_notebooks/tiny_mozart/audiolm_librispeech_training'
 os.chdir(base_path)
 # define all dataset paths, checkpoints, etc
 dataset_folder = "dev-clean"
