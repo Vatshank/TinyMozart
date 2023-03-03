@@ -22,6 +22,8 @@ soundstream_ckpt = "results/soundstream.8.pt" # this can change depending on num
 hubert_ckpt = 'hubert/hubert_base_ls960.pt'
 hubert_quantizer = f'hubert/hubert_base_ls960_L9_km500.bin' # listed in row "HuBERT Base (~95M params)", column Quantizer
 NUM_TRAINING_STEPS = 10000
+BATCH_SIZE = 256
+SAVE_ITER = 500
 
 url = "https://us.openslr.org/resources/12/dev-clean.tar.gz"
 filename = "dev-clean"
@@ -42,11 +44,11 @@ soundstream = SoundStream(
 trainer = SoundStreamTrainer(
     soundstream,
     folder = dataset_folder, #os.path.join(base_path, dataset_folder)
-    batch_size = 4,
+    batch_size = BATCH_SIZE,#4,
     grad_accum_every = 8,         # effective batch size of 32
     data_max_length = 320 * 32,
     save_results_every = 2,
-    save_model_every = 4,
+    save_model_every = SAVE_ITER,
     num_train_steps = NUM_TRAINING_STEPS #9
 ).cuda()
 # NOTE: I changed num_train_steps to 9 (aka 8 + 1) from 10000 to make things go faster for demo purposes
@@ -80,7 +82,7 @@ trainer = SemanticTransformerTrainer(
     transformer = semantic_transformer,
     wav2vec = wav2vec,
     folder = dataset_folder,
-    batch_size = 1,
+    batch_size = BATCH_SIZE,#1,
     data_max_length = 320 * 32,
     num_train_steps = NUM_TRAINING_STEPS
 )
@@ -113,10 +115,10 @@ trainer = CoarseTransformerTrainer(
     soundstream = soundstream,
     wav2vec = wav2vec,
     folder = dataset_folder,
-    batch_size = 1,
+    batch_size = BATCH_SIZE,#1,
     data_max_length = 320 * 32,
-    save_results_every = 2,
-    save_model_every = 4,
+    save_results_every = SAVE_ITER,#2,
+    save_model_every = SAVE_ITER, 4,
     num_train_steps = NUM_TRAINING_STEPS
 )
 # NOTE: I changed num_train_steps to 9 (aka 8 + 1) from 10000 to make things go faster for demo purposes
@@ -145,7 +147,7 @@ trainer = FineTransformerTrainer(
     transformer = fine_transformer,
     soundstream = soundstream,
     folder = dataset_folder,
-    batch_size = 1,
+    batch_size = BATCH_SIZE, #1,
     data_max_length = 320 * 32,
     num_train_steps = NUM_TRAINING_STEPS
 )
