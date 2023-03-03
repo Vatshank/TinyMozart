@@ -11,8 +11,8 @@ import torch
 import torchaudio
 
 # For mounting to google drive - comment out if not on collab vm
-from google.colab import drive
-drive.mount('/content/gdrive')
+# from google.colab import drive
+# drive.mount('/content/gdrive')
 
 base_path = '/content/gdrive/My Drive/colab_notebooks/tiny_mozart/audiolm_librispeech_training'
 os.setwd(base_path)
