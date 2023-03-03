@@ -118,7 +118,7 @@ trainer = CoarseTransformerTrainer(
     batch_size = BATCH_SIZE,#1,
     data_max_length = 320 * 32,
     save_results_every = SAVE_ITER,#2,
-    save_model_every = SAVE_ITER, 4,
+    save_model_every = SAVE_ITER, #4,
     num_train_steps = NUM_TRAINING_STEPS
 )
 # NOTE: I changed num_train_steps to 9 (aka 8 + 1) from 10000 to make things go faster for demo purposes
