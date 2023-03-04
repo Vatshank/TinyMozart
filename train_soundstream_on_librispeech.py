@@ -14,7 +14,7 @@ import torchaudio
 # from google.colab import drive
 # drive.mount('/content/gdrive')
 
-base_path = '/content/drive/MyDrive/colab_notebooks/tiny_mozart/audiolm_librispeech_training'
+base_path = '/content/gdrive/MyDrive/colab_notebooks/tiny_mozart/audiolm_librispeech_training'
 os.chdir(base_path)
 # define all dataset paths, checkpoints, etc
 dataset_folder = "dev-clean"
@@ -22,7 +22,7 @@ soundstream_ckpt = "results/soundstream.8.pt" # this can change depending on num
 hubert_ckpt = 'hubert/hubert_base_ls960.pt'
 hubert_quantizer = f'hubert/hubert_base_ls960_L9_km500.bin' # listed in row "HuBERT Base (~95M params)", column Quantizer
 NUM_TRAINING_STEPS = 10000
-BATCH_SIZE = 256
+BATCH_SIZE = 32
 SAVE_ITER = 500
 
 url = "https://us.openslr.org/resources/12/dev-clean.tar.gz"
@@ -47,7 +47,7 @@ trainer = SoundStreamTrainer(
     batch_size = BATCH_SIZE,#4,
     grad_accum_every = 8,         # effective batch size of 32
     data_max_length = 320 * 32,
-    save_results_every = 2,
+    save_results_every = SAVE_ITER,
     save_model_every = SAVE_ITER,
     num_train_steps = NUM_TRAINING_STEPS #9
 ).cuda()
